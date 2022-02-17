@@ -1,29 +1,28 @@
 {
   "name": "recipe-store-solid",
-  "version": "1.0.0",
-  "description": "\"A recipe store app that uses Solid to store data\"",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "babel-node ./src/bin/www",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && babel ./src --out-dir dist --copy-files",
+    "prod": "node ./dist/bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "github.com/alex9smith/recipe-store-solid"
-  },
-  "author": "Alex Whitehead-Smith",
-  "license": "ISC",
   "dependencies": {
     "@inrupt/solid-client": "^1.19.0",
     "@inrupt/solid-client-authn-browser": "^1.11.5",
     "@inrupt/vocab-common-rdf": "^1.0.3",
-    "parcel-bundler": "^1.12.5"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
   },
-  "browserslist": [
-    "last 3 and_chr versions",
-    "last 3 chrome versions",
-    "last 3 opera versions",
-    "last 3 ios_saf versions",
-    "last 3 safari versions",
-    "last 3 edge versions"
-  ]
+  "devDependencies": {
+    "@babel/cli": "^7.17.3",
+    "@babel/core": "^7.17.4",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11"
+  }
 }
