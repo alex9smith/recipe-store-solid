@@ -11,8 +11,11 @@
   "dependencies": {
     "@inrupt/solid-client": "^1.19.0",
     "@inrupt/solid-client-authn-browser": "^1.11.5",
+    "@inrupt/solid-client-authn-node": "^1.11.5",
     "@inrupt/vocab-common-rdf": "^1.0.3",
+    "@inrupt/vocab-solid": "^1.0.3",
     "cookie-parser": "~1.4.4",
+    "cookie-session": "^2.0.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",

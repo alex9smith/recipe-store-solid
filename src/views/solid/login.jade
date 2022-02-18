@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  h1 Login with your WebID 
+  form(action='/solid/login', method='post')
+    label
+      | WebID
+      input(type='text', name='webid', value='http://localhost:3000/profile/card#me')
+    input(type='submit', name='Login')
