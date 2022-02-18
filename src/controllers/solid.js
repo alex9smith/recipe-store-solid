@@ -8,14 +8,17 @@ import {
 import { SOLID } from '@inrupt/vocab-solid';
 import { VCARD, FOAF } from "@inrupt/vocab-common-rdf";
 
-import { Session  } from "@inrupt/solid-client-authn-node"
+import { 
+  Session,
+  getSessionFromStorage  
+} from "@inrupt/solid-client-authn-node"
 
 const CALLBACK_URL = "http://localhost:3001/solid/login/callback"
 
-const session = new Session();
+export async function render_login(req, res) {
+  const session = await getSessionFromStorage(req.session.sessionId);
 
-export function render_login(req, res) {
-  if(!session.info.isLoggedIn) {
+  if(!session || !session.info.isLoggedIn) {
     res.render('solid/login', { title: 'Login' });
     return
   }
@@ -24,6 +27,7 @@ export function render_login(req, res) {
 };
 
 export async function login(req, res) {
+  const session = new Session();
   req.session.sessionId = session.info.sessionId;
   const webID = req.body.webid
   
