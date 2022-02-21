@@ -13,7 +13,8 @@ import {
   getSessionFromStorage  
 } from "@inrupt/solid-client-authn-node"
 
-const CALLBACK_URL = "http://localhost:3001/solid/login/callback"
+const HOST = 'http://localhost:3001'
+const CALLBACK_URL = `${HOST}/solid/login/callback`
 
 export async function render_login(req, res) {
   const session = await getSessionFromStorage(req.session.sessionId);
@@ -37,12 +38,13 @@ export async function login(req, res) {
   const dataset = await getSolidDataset(profileUrl.href);
   const profile = getThing(dataset, webID);
   const issuer = getUrlAll(profile, 'http://www.w3.org/ns/solid/terms#oidcIssuer')[0];
+  const redirectToOIDC = (url) => { res.redirect(url) };
 
   session.login({
-    redirectUrl: 'http://localhost:3001/solid/login/callback',
+    redirectUrl: CALLBACK_URL,
     oidcIssuer: issuer,
     clientName: 'Recipe demo',
-    handleRedirect: (url) => { res.redirect(url) }
+    handleRedirect: redirectToOIDC
   })
 };
 
@@ -50,6 +52,9 @@ export function home(req, res) {
   res.send("Not implemented - home screen");
 };
 
-export function callback(req, res) {
-  res.send('not implemented - callback')
+export async function callback(req, res) {
+  const session = await getSessionFromStorage(req.session.sessionId);
+  await session.handleIncomingRedirect(`${HOST}${req.url}`);
+  console.log(session.info);
+  res.send('login');
 }
