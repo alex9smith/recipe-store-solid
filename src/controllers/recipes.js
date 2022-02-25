@@ -7,5 +7,9 @@ export async function home(req, res) {
     res.redirect('/login')
     return
   };
-  res.send('home');
+  res.render('recipes/index', {title: 'Home'});
+}
+
+export function recipes_home(req, res) {
+  res.redirect('/')
 }

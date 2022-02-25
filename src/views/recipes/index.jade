@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h1 Welcome to the recipe store
+
+  h2 Current recipes
+  
+  h2 Add a recipe
+  form(action='/recipes', method='post')
+    label
+      | Title
+      input(type='text', name='title', value='')
+    input(type='submit', name='Save')

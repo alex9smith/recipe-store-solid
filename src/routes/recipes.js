@@ -3,7 +3,8 @@ var router = express.Router();
 
 var recipesController = require('../controllers/recipes')
 
-/* GET home page. */
 router.get('/', recipesController.home);
+
+router.get('/recipes', recipesController.recipes_home)
 
 module.exports = router;
