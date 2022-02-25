@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieSession = require("cookie-session");
 
 
-var indexRouter = require('./routes/index');
+var recipesRouter = require('./routes/recipes');
 var loginRouter = require('./routes/login');
 
 var app = express();
@@ -25,7 +25,7 @@ app.use(cookieSession({
   keys: ['key1', 'key2']
 }));
 
-app.use('/', indexRouter);
+app.use('/', recipesRouter);
 app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
