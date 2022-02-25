@@ -14,17 +14,17 @@ import {
 } from "@inrupt/solid-client-authn-node"
 
 const HOST = 'http://localhost:3001'
-const CALLBACK_URL = `${HOST}/solid/login/callback`
+const CALLBACK_URL = `${HOST}/login/callback`
 
 export async function render_login(req, res) {
   const session = await getSessionFromStorage(req.session.sessionId);
 
   if(!session || !session.info.isLoggedIn) {
-    res.render('solid/login', { title: 'Login' });
+    res.render('login/login', { title: 'Login' });
     return
   }
 
-  res.redirect('/solid/home');
+  res.redirect('/home');
 };
 
 export async function login(req, res) {
@@ -48,13 +48,8 @@ export async function login(req, res) {
   })
 };
 
-export function home(req, res) {
-  res.send("Not implemented - home screen");
-};
-
 export async function callback(req, res) {
   const session = await getSessionFromStorage(req.session.sessionId);
   await session.handleIncomingRedirect(`${HOST}${req.originalUrl}`);
-  console.log(session.info);
   res.send('login');
 }
