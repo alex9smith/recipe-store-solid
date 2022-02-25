@@ -54,7 +54,7 @@ export function home(req, res) {
 
 export async function callback(req, res) {
   const session = await getSessionFromStorage(req.session.sessionId);
-  await session.handleIncomingRedirect(`${HOST}${req.url}`);
+  await session.handleIncomingRedirect(`${HOST}${req.originalUrl}`);
   console.log(session.info);
   res.send('login');
 }
