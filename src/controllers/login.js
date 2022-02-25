@@ -24,7 +24,7 @@ export async function render_login(req, res) {
     return
   }
 
-  res.redirect('/home');
+  res.redirect('/');
 };
 
 export async function login(req, res) {
@@ -51,5 +51,5 @@ export async function login(req, res) {
 export async function callback(req, res) {
   const session = await getSessionFromStorage(req.session.sessionId);
   await session.handleIncomingRedirect(`${HOST}${req.originalUrl}`);
-  res.send('login');
+  res.redirect('/')
 }
